@@ -8,7 +8,7 @@ function tokenForUser(user){
 }
 exports.signin = function( req, res, next){
     // User has already had their email and password 'auth' d 
-    // We just need ton give them a token
+    // We just need to give them a token
     res.send({ token: tokenForUser(req.user)})
 }
 exports.signup = function(req, res, next){
@@ -27,7 +27,7 @@ exports.signup = function(req, res, next){
 
         // If a user with the email does exist, return an error
         if(existingUser){
-            return res.status(422).send({error: 'Email is Already in Use'})
+            return res.status(422).send({error: 'Sorry Email is Already in Use'})
         }
         // If a user with the email does NOT exist, create and save user
         const user = new User({
