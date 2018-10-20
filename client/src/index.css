@@ -1,7 +1,7 @@
-.MuiTab-textColorPrimary-62.MuiTab-selected-64{
+.MuiTab-textColorPrimary-64.MuiTab-selected-66{
     color: #f44336 !important;
 }
-.TabIndicator-colorPrimary-84{
+.TabIndicator-colorPrimary-86{
     background-color: #f44336 !important;
 }
 .MuiFormLabel-root-139.MuiFormLabel-focused-140{
@@ -15,4 +15,8 @@
 }
 .MuiInput-formControl-150{
     margin-right: 10px !important; 
+}
+
+.LoginReg-fabProgress-2{
+    color: #f44336 !important;
 }
