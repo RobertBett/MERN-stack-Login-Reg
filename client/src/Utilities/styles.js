@@ -1,11 +1,17 @@
 import green from '@material-ui/core/colors/green';
 
 export const styles = theme => ({
+  TabColor: {
+    color: '#f44336',
+  },
   buttonSuccess: {
     backgroundColor: green[500],
     '&:hover': {
       backgroundColor: green[700],
     },
+  },
+  InputError: {
+    color: '#f44336',
   },
   fabProgress: {
     color: green[500],

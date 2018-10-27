@@ -1,7 +1,7 @@
-.MuiTab-textColorPrimary-64.MuiTab-selected-66{
+.MuiTab-textColorPrimary-66.MuiTab-selected-68{
     color: #f44336 !important;
 }
-.TabIndicator-colorPrimary-86{
+.TabIndicator-colorPrimary-88{
     background-color: #f44336 !important;
 }
 .MuiFormLabel-root-139.MuiFormLabel-focused-140{
@@ -13,10 +13,14 @@
 .MuiFormLabel-root-363.MuiFormLabel-focused-364{
     color: #f44336 !important;
 }
-.MuiInput-formControl-150{
+.MuiInput-formControl-154{
     margin-right: 10px !important; 
 }
 
 .LoginReg-fabProgress-2{
     color: #f44336 !important;
+}
+
+.MuiFormHelperText-root-234{
+    color: red !important;
 }
