@@ -1,17 +1,55 @@
 import green from '@material-ui/core/colors/green';
 
 export const styles = theme => ({
+  //  DASHOBOARD STYLING
+  dashboardRoot: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+    textTransform: 'capitalize',
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+  textButtons: {
+    color: '#f44336',
+    '&:hover': {
+      backgroundColor: '#f44336',
+      color: '#fff',
+    },
+  },
+
+  // LOGIN AND REGISTRATION STYLING
+  halfLabel: {
+    marginRight: 10,
+  },
+  TabColor: {
+    color: '#f44336',
+  },
+  EmojiSize: {
+    fontSize: '24px',
+  },
   buttonSuccess: {
     backgroundColor: green[500],
     '&:hover': {
       backgroundColor: green[700],
     },
   },
+  InputError: {
+    color: '#f44336',
+  },
   fabProgress: {
-    color: green[500],
+    color: '#f44336',
     position: 'absolute',
-    left: '20%',
     zIndex: 1,
+  },
+  fabProgress1: {
+    left: '20%',
+  },
+  fabProgress2: {
+    left: '30%',
   },
   root: {
     flexGrow: 1,

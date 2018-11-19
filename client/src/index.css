@@ -1,22 +1,3 @@
-.MuiTab-textColorPrimary-64.MuiTab-selected-66{
-    color: #f44336 !important;
-}
-.TabIndicator-colorPrimary-86{
-    background-color: #f44336 !important;
-}
-.MuiFormLabel-root-139.MuiFormLabel-focused-140{
-    color: #f44336 !important;
-}
-.MuiInput-underline-150:after{
-    border-bottom: 2px solid #f44336 !important;
-}
-.MuiFormLabel-root-363.MuiFormLabel-focused-364{
-    color: #f44336 !important;
-}
-.MuiInput-formControl-150{
-    margin-right: 10px !important; 
-}
-
-.LoginReg-fabProgress-2{
-    color: #f44336 !important;
+.capitalize{
+    text-transform: capitalize
 }

@@ -10,9 +10,22 @@ import Button from '@material-ui/core/Button';
 import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import CircularProgress from '@material-ui/core/CircularProgress';
+import IconButton from '@material-ui/core/IconButton';
+import InputAdornment from '@material-ui/core/InputAdornment';
+import Visibility from '@material-ui/icons/Visibility';
+import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TabContainer from '../../Utilities/TabContainer';
 
-const Login = ({ classes, loading, handleSubmit }) => (
+const Login = ({
+  email,
+  password,
+  classes,
+  loading,
+  handleSubmit,
+  handleClickShowPassword,
+  showPassword,
+  handleForm,
+}) => (
   <TabContainer className={classes.margin}>
     <Paper className={classes.paper}>
       <Avatar className={classNames(classes.avatar, classes.margin)}>
@@ -26,16 +39,37 @@ const Login = ({ classes, loading, handleSubmit }) => (
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="email">
           Email Address
           </InputLabel>
-          <Input classes={{ underline: classes.cssUnderline }} id="email" name="email" autoComplete="email" autoFocus />
+          <Input
+            onChange={handleForm}
+            value={email}
+            classes={{ underline: classes.cssUnderline }}
+            id="email"
+            name="email"
+            autoComplete="email"
+            autoFocus
+          />
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="password">Password</InputLabel>
           <Input
+            onChange={handleForm}
+            value={password}
             name="password"
-            type="password"
+            type={showPassword ? 'text' : 'password'}
             id="password"
             autoComplete="current-password"
             classes={{ underline: classes.cssUnderline }}
+            endAdornment={(
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="Toggle password visibility"
+                  onClick={handleClickShowPassword}
+                >
+                  {showPassword ? <VisibilityOff /> : <Visibility />}
+                </IconButton>
+              </InputAdornment>
+            )}
+
           />
         </FormControl>
         <Button
@@ -50,8 +84,8 @@ const Login = ({ classes, loading, handleSubmit }) => (
           {loading && (
             <CircularProgress
               size={30}
-              className={classes.fabProgress}
-              thickness={5}
+              className={classNames(classes.fabProgress, classes.fabProgress2)}
+              thickness={7}
             />
           )}
       Sign in
@@ -62,9 +96,14 @@ const Login = ({ classes, loading, handleSubmit }) => (
 );
 
 Login.propTypes = {
+  handleForm: PropTypes.func,
+  password: PropTypes.string,
+  email: PropTypes.string,
   classes: PropTypes.shape({}).isRequired,
   loading: PropTypes.bool,
+  showPassword: PropTypes.bool,
   handleSubmit: PropTypes.func,
+  handleClickShowPassword: PropTypes.func,
 };
 
 export default Login;
