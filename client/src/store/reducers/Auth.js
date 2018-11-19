@@ -1,15 +1,29 @@
 import * as actionTypes from '../actions/types';
 
 const INITIAL_STATE = {
-  authenticated: '',
-  errorMessage: '',
+  authenticated: sessionStorage.getItem('userInfo'),
+  errorMessage: false,
+  emailAlready: false,
 };
 
 export const Auth = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case actionTypes.AUTH_USER:
-    console.log('ITWORKS', action.formData);
-    return { ...state };
+    return {
+      ...state,
+      authenticated: action.token,
+    };
+  case actionTypes.AUTH_ERROR:
+    if (action.status === 422) {
+      return {
+        ...state,
+        emailAlready: true,
+      };
+    }
+    return {
+      ...state,
+      errorMessage: true,
+    };
   default:
     return state;
   }

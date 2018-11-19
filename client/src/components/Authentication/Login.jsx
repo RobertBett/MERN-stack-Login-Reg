@@ -84,7 +84,7 @@ const Login = ({
           {loading && (
             <CircularProgress
               size={30}
-              className={classes.fabProgress}
+              className={classNames(classes.fabProgress, classes.fabProgress2)}
               thickness={7}
             />
           )}

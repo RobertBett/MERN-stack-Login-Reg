@@ -22,7 +22,11 @@ const Registration = ({
   classes, loading, handleSubmit,
   handleClickShowPassword, showPassword,
   firstName, lastName, email, password, handleForm,
-  confirmPassword,
+  confirmPassword, emailAlready,
+  emailInValid, firstNameInValid, lastNameInValid,
+  confirmPasswordInValid, passwordWeak, passwordMedium,
+  passwordMild, passwordStrong,
+
 }) => (
   <TabContainer className={classNames(classes.InputError)}>
     <Paper className={classes.paper}>
@@ -33,7 +37,7 @@ const Registration = ({
         Create an account
       </Typography>
       <form className={classes.form} onSubmit={handleSubmit}>
-        <FormControl margin="normal" required>
+        <FormControl className={classNames(classes.halfLabel)} margin="normal" required>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="firstName">First Name</InputLabel>
           <Input
             onChange={handleForm}
@@ -44,7 +48,7 @@ const Registration = ({
             autoComplete="firstName"
             classes={{ underline: classes.cssUnderline }}
           />
-          <FormHelperText className={classNames(classes.InputError)} id="component-error-text">First Name Cannot be Blank</FormHelperText>
+          {firstNameInValid && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">First Name Cannot be Blank</FormHelperText>}
         </FormControl>
         <FormControl margin="normal" required>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="lastName">Last Name</InputLabel>
@@ -57,7 +61,7 @@ const Registration = ({
             autoComplete="lastName"
             classes={{ underline: classes.cssUnderline }}
           />
-          <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Last Name Cannot be Blank</FormHelperText>
+          {lastNameInValid && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Last Name Cannot be Blank</FormHelperText>}
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="email">
@@ -72,8 +76,8 @@ const Registration = ({
             autoComplete="email"
             autoFocus
           />
-          <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Email is Already in Use </FormHelperText>
-          <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Email is Invalid </FormHelperText>
+          {emailAlready && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Email is Already in Use </FormHelperText>}
+          {emailInValid && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Email is Invalid. Format should be ( example@example.com ) </FormHelperText>}
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="password">Password</InputLabel>
@@ -87,6 +91,11 @@ const Registration = ({
             classes={{ underline: classes.cssUnderline }}
             endAdornment={(
               <InputAdornment position="end">
+                {console.log(passwordMedium)}
+                {passwordWeak && <span role="img" className={classes.EmojiSize} aria-labelledby="Sad-face">😔</span>}
+                {passwordMedium && !passwordStrong && <span role="img" className={classes.EmojiSize} aria-labelledby="Happy-face">😁</span>}
+                { passwordMild && <span role="img" className={classes.EmojiSize} aria-labelledby="Happy-face">🙂</span> }
+                { passwordStrong && <span role="img" className={classes.EmojiSize} aria-labelledby="biceps">💪</span> }
                 <IconButton
                   aria-label="Toggle password visibility"
                   onClick={handleClickShowPassword}
@@ -96,6 +105,11 @@ const Registration = ({
               </InputAdornment>
             )}
           />
+          {passwordWeak && (<FormHelperText className={classNames(classes.InputError)} id="component-error-text">Password is pretty weak. (It should be at least 6 characters)</FormHelperText>)}
+          {passwordMild && (<FormHelperText className={classNames(classes.InputError)} id="component-error-text">Password is still weak (try adding Capital Letters)</FormHelperText>)}
+          {passwordMedium && !passwordStrong && (<FormHelperText className={classNames(classes.InputError)} id="component-error-text">Password is better, but not strong enough </FormHelperText>)}
+          {passwordMedium && !passwordStrong && (<FormHelperText className={classNames(classes.InputError)} id="component-error-text">Try adding Numbers and Special characters (!@#$%^&*) </FormHelperText>)}
+          {passwordStrong && (<FormHelperText className={classNames(classes.InputError)} id="component-error-text">Password is pretty Strong Good Job!</FormHelperText>)}
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="password">Confirm Password</InputLabel>
@@ -118,6 +132,7 @@ const Registration = ({
               </InputAdornment>
             )}
           />
+          {confirmPasswordInValid && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Passwords do not match </FormHelperText>}
         </FormControl>
         <Button
           disabled={loading}
@@ -131,7 +146,7 @@ const Registration = ({
           {loading && (
             <CircularProgress
               size={30}
-              className={classes.fabProgress}
+              className={classNames(classes.fabProgress, classes.fabProgress1)}
               thickness={7}
             />
           )}
@@ -143,7 +158,21 @@ const Registration = ({
 );
 
 Registration.propTypes = {
+  passwordMedium: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.bool,
+  ]),
+  passwordStrong: PropTypes.oneOfType([
+    PropTypes.array,
+    PropTypes.bool,
+  ]),
+  passwordMild: PropTypes.bool,
+  passwordWeak: PropTypes.bool,
   email: PropTypes.string,
+  lastNameInValid: PropTypes.bool,
+  confirmPasswordInValid: PropTypes.bool,
+  emailInValid: PropTypes.bool,
+  firstNameInValid: PropTypes.bool,
   firstName: PropTypes.string,
   lastName: PropTypes.string,
   password: PropTypes.string,
@@ -154,7 +183,7 @@ Registration.propTypes = {
   handleSubmit: PropTypes.func,
   handleForm: PropTypes.func,
   handleClickShowPassword: PropTypes.func,
-
+  emailAlready: PropTypes.bool,
 };
 
 export default Registration;
