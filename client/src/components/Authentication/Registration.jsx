@@ -65,7 +65,7 @@ const Registration = ({
         </FormControl>
         <FormControl margin="normal" required fullWidth>
           <InputLabel FormLabelClasses={{ root: classes.cssLabel, focused: classes.cssFocused }} htmlFor="email">
-          Email Address
+            Email Address
           </InputLabel>
           <Input
             onChange={handleForm}
@@ -150,7 +150,7 @@ const Registration = ({
               thickness={7}
             />
           )}
-        Create Account
+          Create Account
         </Button>
       </form>
     </Paper>

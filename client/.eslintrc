@@ -47,9 +47,10 @@
             "react/jsx-no-bind": 1,
           "import/no-extraneous-dependencies": 0,
           "import/no-named-as-default": 0,
-          "react/require-default-props" : 1,
+          "react/require-default-props" : 0,
           "react/forbid-prop-types": "off",
           "no-underscore-dangle": 0,
+          "react/prop-types":0,
           "jsx-a11y/label-has-for": [ 1, {
             "required": {
               "some": [ "nesting", "id" ]
