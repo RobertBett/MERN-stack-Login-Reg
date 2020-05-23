@@ -18,43 +18,39 @@ exports.signin = function( req, res, next){
     })
 }
 exports.signup = function(req, res, next){
-    const Email = req.body.email;
-    const Password = req.body.password;
-    const FirstName = req.body.firstName;
-    const LastName = req.body.lastName;
+    const { email, password, firstName, lastName } = req.body;
 
-    if(!Email || !Password || !LastName || !FirstName){
+    if(!email || !password || !lastName || !firstName){
         return res.status(422).send({ error: 'You must provide a First Name, Last Name, Email and Password'});
     }
 
    // See if a user with the given email exists
-   User.findOne({ email: Email}, (err, existingUser) =>{
-        if(err){ return next(err)}
-
+   User.findByEmail(email)
+   .then((existingUser) => {
         // If a user with the email does exist, return an error
-        if(existingUser){
-            return res.status(422).send({error: 'Sorry Email is Already in Use'})
-        }
-        // If a user with the email does NOT exist, create and save user
-        const user = new User({
-            firstName: FirstName,
-            lastName: LastName,
-            email: Email,
-            password: Password
-        })
-        user.save((err) =>{
-            if(err){ return next(err);}
+        return existingUser &&  res.status(422).send({error: 'Sorry Email is Already in Use'})
+   })
+   .then(() => {
+    console.log(email,)
+    // If a user with the email does NOT exist, create and save user
+    const newUser = new User(email, firstName, lastName, password);
 
-             // Respond to request initcating the user was created
-             res.json({ 
-                 user:{
-                    token: tokenForUser(user),
-                    firstName: FirstName,
-                    lastName: LastName
-                }
-                });
-        })
+    newUser.save()
+        .then(() => {
+            res.json({ 
+                user:{
+                token: tokenForUser(newUser),
+                firstName,
+                lastName
+            }
+            });
+        }).catch((err) => {
+            console.error(err)
+        }); 
+   })
+   .catch((err) => {
+       console.error(err);
+       
    });
-
    
 }

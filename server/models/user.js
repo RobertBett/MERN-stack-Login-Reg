@@ -1,46 +1,52 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
-const bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
+const { getDb } = require('../services/database');
 
-// Define our model
-const userSchema = new Schema({
-    email: { type : String, unique: true, lowercase: true},
-    firstName: String,
-    lastName:String,
-    password: String
-});
+class User {
+    constructor(email, firstName, lastName, password){
+        this.email = email;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.password = password;
+    }
 
-// On Save Hook, encrypt password
-// Before saving a model, run this function
-userSchema.pre('save', function (next){
-    // get access to the user model
-    const user = this;
-    console.log('[THIS IS A TEST]', user)
+    save(){
+        const db = getDb();
+        const user = this;
+        const saltRounds= 10;
 
-    //Generate a Salt then run callback
-    bcrypt.genSalt(10, function (err, salt){
-        if(err){return next(err);}
-
-        //hash (encrypt) our password using the salt
-        bcrypt.hash(user.password, salt, null, function (err, hash){
-            if(err){return next(err); }
-
-            //Overwrite plain test password with encrypted password
+    return bcrypt.genSalt(saltRounds)
+        .then(salt => {
+          console.log(`Salt: ${salt}`, user.password);
+          return bcrypt.hash(user.password, salt);
+        })
+        .then(hash => {
+          console.log(`Hash: ${hash}`);
             user.password = hash;
-            next();
+            db.collection('user').insertOne(user)
+        })
+        .catch(err => console.error(err.message));
+
+    }
+
+    static comparePassword(inputPassword, ogPassword){
+       return bcrypt.compare(inputPassword, ogPassword)
+        .then((res) => {
+            return res;
+        }).catch((err) => {
+            console.error(err);
         });
-    })
-})
+    }
 
-userSchema.methods.comparePassword = function( candiatePassword, callback){
-    bcrypt.compare(candiatePassword,  this.password, function( err, isMatch){
-        if(err){ return callback(err);}
-         callback(null, isMatch);
-    })
+    static findByEmail(email){
+        const db = getDb();
+        return db.collection('user').findOne({email})
+                .then((result) => {
+                    return result
+                }).catch((err) => {
+                    console.error(err);
+                });
+    }
+
 }
-// Create the model class
-const ModelClass = mongoose.model('user', userSchema);
 
-
-// Export the model
-module.exports = ModelClass;
+module.exports = User;
