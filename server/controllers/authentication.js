@@ -30,7 +30,7 @@ exports.signup = function(req, res, next){
         // If a user with the email does exist, return an error
         return existingUser &&  res.status(422).send({error: 'Sorry Email is Already in Use'})
    })
-   .then((value) => {
+   .then(() => {
     console.log(email,)
     // If a user with the email does NOT exist, create and save user
     const newUser = new User(email, firstName, lastName, password);

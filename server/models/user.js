@@ -28,10 +28,10 @@ class User {
 
     }
 
-    static comparePassword(candiatePassword){
-        bcrypt.compare(candiatePassword, this.password)
-        .then(() => {
-            return true;
+    static comparePassword(inputPassword, ogPassword){
+       return bcrypt.compare(inputPassword, ogPassword)
+        .then((res) => {
+            return res;
         }).catch((err) => {
             console.error(err);
         });
@@ -41,7 +41,6 @@ class User {
         const db = getDb();
         return db.collection('user').findOne({email})
                 .then((result) => {
-                    console.log(result)
                     return result
                 }).catch((err) => {
                     console.error(err);

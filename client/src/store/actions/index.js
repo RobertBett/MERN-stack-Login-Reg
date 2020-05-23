@@ -21,7 +21,6 @@ export const signup = ({
   axios.post('http://localhost:3090/signup',
     {
       firstName, lastName, email, password,
-
     }).then(({ data }) => {
     const { user } = data;
     sessionStorage.setItem('userInfo', JSON.stringify(user));
