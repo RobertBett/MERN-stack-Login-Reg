@@ -102,7 +102,7 @@ const mapDispatchToProps = dispatch => ({
 });
 
 Dashboard.propTypes = {
-  authenticated: PropTypes.bool,
+  authenticated: PropTypes.string,
   history: PropTypes.object,
   classes: PropTypes.object.isRequired,
   logout: PropTypes.func.isRequired,

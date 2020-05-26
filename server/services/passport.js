@@ -12,23 +12,17 @@ const localLogin = new LocalStrategy(localOptions, function(email, password, don
     // Verify this email and Password, call done with the user 
     // if it is the correct username and password 
     // otherwise, call done with false 
-    User.findByEmail( email )
-    .then((user) => {
-        return user;
-    }).catch((err) => {
-        console.error(err);
-    });
 
     User.findByEmail(email)
         .then((user) => {
             console.log(email, password)
-            // compare passwords - is 'password' equal to user.password?
             User.comparePassword(password,user.password)
             .then((isMatch) => {
-                return !isMatch ? false : done(null, user);
+                return !isMatch ? done(null,false, {message:' Wrong password!'}) : done(null, user);
             }).catch((err) => {
                 console.error(err);
             }); 
+            return user;
         }).catch((err) => {
             console.error(err);  
         });

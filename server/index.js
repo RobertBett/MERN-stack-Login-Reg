@@ -9,8 +9,6 @@ const cors = require('cors');
 const { mongoConnect } = require('./services/database');
 const chalk = require('chalk');
 
-//DB Setup
-
 
 
 //App Setup
@@ -24,6 +22,8 @@ router(app);
 // const server = http.createServer(app)
 // server.listen(port);
 // console.log(`Server listening on....${port}`)
+
+
 const port = 3090
 mongoConnect(()=>{
     app.listen(port, () => {
