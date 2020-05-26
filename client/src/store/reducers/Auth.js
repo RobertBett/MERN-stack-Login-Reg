@@ -20,10 +20,17 @@ export const Auth = (state = INITIAL_STATE, action) => {
         emailAlready: true,
       };
     }
+    else if (action.status === 401){
+      return {
+        ...state,
+        wrongPassword: true,
+      };
+    }
     return {
       ...state,
       errorMessage: true,
     };
+
   default:
     return state;
   }

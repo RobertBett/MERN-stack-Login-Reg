@@ -15,6 +15,7 @@ import InputAdornment from '@material-ui/core/InputAdornment';
 import Visibility from '@material-ui/icons/Visibility';
 import VisibilityOff from '@material-ui/icons/VisibilityOff';
 import TabContainer from '../../Utilities/TabContainer';
+import { FormHelperText } from '@material-ui/core';
 
 const Login = ({
   email,
@@ -25,6 +26,7 @@ const Login = ({
   handleClickShowPassword,
   showPassword,
   handleForm,
+  wrongPassword
 }) => (
   <TabContainer className={classes.margin}>
     <Paper className={classes.paper}>
@@ -71,6 +73,8 @@ const Login = ({
             )}
 
           />
+          {console.log(wrongPassword,['HELLO'])}
+          {wrongPassword && <FormHelperText className={classNames(classes.InputError)} id="component-error-text">Whoops incorect Email or Password 😳</FormHelperText>}
         </FormControl>
         <Button
           disabled={loading}

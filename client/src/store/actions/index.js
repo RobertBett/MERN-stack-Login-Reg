@@ -9,8 +9,10 @@ export const signin = ({ email, password }) => (dispatch) => {
     console.log(user);
     sessionStorage.setItem('userInfo', JSON.stringify(user));
     dispatch({ type: AUTH_USER, token: user.token });
-  }).catch((err) => {
-    console.log(err);
+  }).catch(({response}) => {
+    const { status } = response
+    dispatch({ type: AUTH_ERROR, status})
+    console.log(response)
   });
 };
 
@@ -25,11 +27,9 @@ export const signup = ({
     const { user } = data;
     sessionStorage.setItem('userInfo', JSON.stringify(user));
     dispatch({ type: AUTH_USER, token: user.token });
-  }).catch((err) => {
-    if (err.response) {
-      const { status } = err.response;
-      dispatch({ type: AUTH_ERROR, status });
-    }
+  }).catch(({response}) => {
+    const { status } = response;
+    dispatch({ type: AUTH_ERROR, status})
   });
 };
 

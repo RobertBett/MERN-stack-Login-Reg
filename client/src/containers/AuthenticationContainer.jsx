@@ -132,7 +132,7 @@ class AuthenticationContainer extends React.Component {
     };
 
     render() {
-      const { classes } = this.props;
+      const { classes, wrongPassword } = this.props;
       const {
         value, password, email, firstName, lastName, confirmPassword,
         loading, showPassword, firstNameInValid, lastNameInValid, confirmPasswordInValid,
@@ -143,6 +143,7 @@ class AuthenticationContainer extends React.Component {
       if (this.props.authenticated) {
         this.props.history.push('/dashboard');
       }
+      console.log(wrongPassword,['WHATS IN THIS'])
       return (
         <main className={classNames(classes.layout, classes.margin)}>
           <AppBar position="static" color="inherit">
@@ -166,6 +167,7 @@ class AuthenticationContainer extends React.Component {
               handleForm={this.handleForm}
               handleSubmit={this.handleButtonClick}
               handleClickShowPassword={this.handleClickShowPassword}
+              wrongPassword={wrongPassword}
             />
           )}
           {value === 1 && (
@@ -200,6 +202,7 @@ class AuthenticationContainer extends React.Component {
 const mapStateToProps = state => ({
   authenticated: state.Auth.authenticated,
   emailAlready: state.Auth.emailAlready,
+  wrongPassword: state.Auth.wrongPassword,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -209,6 +212,7 @@ const mapDispatchToProps = dispatch => ({
 
 AuthenticationContainer.propTypes = {
   emailAlready: PropTypes.bool.isRequired,
+  wrongPassword: PropTypes.bool.isRequired,
   signup: PropTypes.func.isRequired,
   signin: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,
