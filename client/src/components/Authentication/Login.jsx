@@ -79,11 +79,11 @@ const Login = ({
         <Button
           disabled={loading}
           type="submit"
-          fullWidth
+          fullWidth="fullwidth"
           size="medium"
           variant="extendedFab"
           color="primary"
-          className={classNames(classes.submit, classes.mainColor)}
+          className={classNames(classes.submit, classes.mainColor, classes.buttonText)}
         >
           {loading && (
             <CircularProgress

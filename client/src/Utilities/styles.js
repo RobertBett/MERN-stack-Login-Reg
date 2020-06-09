@@ -31,17 +31,25 @@ export const styles = theme => ({
   EmojiSize: {
     fontSize: '24px',
   },
+  TabRoot:{
+    minWidth:'50%'
+  },
+
+  //BUTTON STYLING
   buttonSuccess: {
     backgroundColor: green[500],
     '&:hover': {
       backgroundColor: green[700],
     },
   },
+  buttonText:{
+    color: 'white'
+  },
   InputError: {
     color: '#f44336',
   },
   fabProgress: {
-    color: '#f44336',
+    color: 'white',
     position: 'absolute',
     zIndex: 1,
   },
@@ -76,9 +84,9 @@ export const styles = theme => ({
   layout: {
     width: 'auto',
     display: 'block', // Fix IE11 issue.
-    marginLeft: theme.spacing.unit * 3,
-    marginRight: theme.spacing.unit * 3,
-    [theme.breakpoints.up(400 + theme.spacing.unit * 3 * 2)]: {
+    marginLeft: theme.spacing(3),
+    marginRight: theme.spacing(3),
+    [theme.breakpoints.up(400 + theme.spacing(3 * 2))]: {
       width: 400,
       marginLeft: 'auto',
       marginRight: 'auto',
@@ -88,27 +96,27 @@ export const styles = theme => ({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    padding: `${theme.spacing.unit * 2}px ${theme.spacing.unit * 3}px ${theme.spacing.unit * 3}px`,
+    padding: `${theme.spacing(2)}px ${theme.spacing(3)}px ${theme.spacing(3)}px`,
   },
   icon: {
     width: 30,
     height: 30,
   },
   avatar: {
-    margin: theme.spacing.unit,
+    margin: theme.spacing(),
     backgroundColor: '#f44336',
     width: 50,
     height: 50,
   },
   margin: {
-    marginTop: theme.spacing.unit * 6,
+    marginTop: theme.spacing(6),
   },
   form: {
     width: '100%', // Fix IE11 issue.
-    marginTop: theme.spacing.unit,
+    marginTop: theme.spacing(),
   },
   submit: {
-    marginTop: theme.spacing.unit * 6,
+    marginTop: theme.spacing(6),
     '&:hover': { backgroundColor: '#f44336' },
   },
 });

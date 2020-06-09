@@ -23,7 +23,6 @@ exports.signup = function(req, res, next){
     if(!email || !password || !lastName || !firstName){
         return res.status(422).send({ error: 'You must provide a First Name, Last Name, Email and Password'});
     }
-
    // See if a user with the given email exists
    User.findByEmail(email)
    .then((existingUser) => {
@@ -31,7 +30,6 @@ exports.signup = function(req, res, next){
         return existingUser &&  res.status(422).send({error: 'Sorry Email is Already in Use'})
    })
    .then(() => {
-    console.log(email,)
     // If a user with the email does NOT exist, create and save user
     const newUser = new User(email, firstName, lastName, password);
 

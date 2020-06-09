@@ -133,6 +133,7 @@ class AuthenticationContainer extends React.Component {
 
     render() {
       const { classes, wrongPassword } = this.props;
+      console.log(wrongPassword,['WRONG PASSWORD'])
       const {
         value, password, email, firstName, lastName, confirmPassword,
         loading, showPassword, firstNameInValid, lastNameInValid, confirmPasswordInValid,
@@ -151,10 +152,10 @@ class AuthenticationContainer extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
               fullWidth
-              className={classNames(classes.InputError)}
+              className={classNames(classes.InputError, classes.TabRoot)}
             >
-              <Tab label="Sign in" icon={<Person />} />
-              <Tab label="Create an Account" icon={<PersonAdd />} />
+              <Tab className={classNames(classes.TabRoot)} label="Sign in" icon={<Person />} />
+              <Tab className={classNames(classes.TabRoot)} label="Create an Account" icon={<PersonAdd />} />
             </Tabs>
           </AppBar>
           {value === 0 && (
@@ -212,7 +213,7 @@ const mapDispatchToProps = dispatch => ({
 
 AuthenticationContainer.propTypes = {
   emailAlready: PropTypes.bool.isRequired,
-  wrongPassword: PropTypes.bool.isRequired,
+  wrongPassword: PropTypes.bool,
   signup: PropTypes.func.isRequired,
   signin: PropTypes.func.isRequired,
   classes: PropTypes.object.isRequired,

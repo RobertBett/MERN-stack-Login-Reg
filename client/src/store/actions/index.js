@@ -10,8 +10,10 @@ export const signin = ({ email, password }) => (dispatch) => {
     sessionStorage.setItem('userInfo', JSON.stringify(user));
     dispatch({ type: AUTH_USER, token: user.token });
   }).catch(({response}) => {
-    const { status } = response
-    dispatch({ type: AUTH_ERROR, status})
+    if (response) {
+       const { status } = response 
+       dispatch({ type: AUTH_ERROR, status})
+      }
     console.log(response)
   });
 };

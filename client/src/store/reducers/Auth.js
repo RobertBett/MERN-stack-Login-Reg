@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   authenticated: sessionStorage.getItem('userInfo'),
   errorMessage: false,
   emailAlready: false,
+  wrongPassword: false,
 };
 
 export const Auth = (state = INITIAL_STATE, action) => {
